@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="marlin@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.2">
+    <root id="1"/>
+    <schema id="2" parent="1" name="marlin">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="ajax-php"/>
+    <schema id="4" parent="1" name="eshop"/>
+    <schema id="5" parent="1" name="gbook"/>
+    <schema id="6" parent="1" name="images"/>
+    <schema id="7" parent="1" name="information_schema"/>
+    <schema id="8" parent="1" name="ips_dictionary"/>
+    <schema id="9" parent="1" name="keys-admin"/>
+    <schema id="10" parent="1" name="laralove"/>
+    <schema id="11" parent="1" name="library"/>
+    <schema id="12" parent="1" name="links"/>
+    <schema id="13" parent="1" name="main"/>
+    <schema id="14" parent="1" name="main_extra"/>
+    <schema id="15" parent="1" name="mysql"/>
+    <schema id="16" parent="1" name="optic"/>
+    <schema id="17" parent="1" name="optic1"/>
+    <schema id="18" parent="1" name="parser"/>
+    <schema id="19" parent="1" name="performance_schema"/>
+    <schema id="20" parent="1" name="portfolio"/>
+    <schema id="21" parent="1" name="reg"/>
+    <schema id="22" parent="1" name="regs"/>
+    <schema id="23" parent="1" name="services"/>
+    <schema id="24" parent="1" name="shop"/>
+    <schema id="25" parent="1" name="snyatkov"/>
+    <schema id="26" parent="1" name="stats"/>
+    <schema id="27" parent="1" name="stats-server"/>
+    <schema id="28" parent="1" name="sublime"/>
+    <schema id="29" parent="1" name="testtry"/>
+    <schema id="30" parent="1" name="users"/>
+    <schema id="31" parent="1" name="yii2-ang"/>
+    <schema id="32" parent="1" name="yii2advanced"/>
+    <table id="33" parent="2" name="post"/>
+    <column id="34" parent="33" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="35" parent="33" name="title">
+      <Position>2</Position>
+      <DataType>varchar(250)|0</DataType>
+    </column>
+    <column id="36" parent="33" name="content">
+      <Position>3</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <key id="37" parent="33" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
