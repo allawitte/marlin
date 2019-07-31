@@ -4,12 +4,12 @@
 class ImageManager
 {
     public static function upload($files = []){
-        if(count($files) == 0) return false;
+        if(count($files) == 0) return [];
         $key = ImageManager::getKey($files);
         $name = ImageManager::makeName($files[$key]['name']);
         $tmpName = $files[$key]['tmp_name'];
         move_uploaded_file($tmpName, 'uploads/'.$name);
-        return 'uploads/'.$name;
+        return [$key => $name];
     }
     private function getKey($files){
         return array_keys($_FILES)[0];

@@ -21,7 +21,7 @@ class Db
     }
 
     public function create($table, $data){
-        $img = ImageManager::upload($_FILES);
+        $data = $this->addImage($data);
         $keys = array_keys($data);
         $fields = implode(' ,', $keys);
         $values = ':'.implode(', :', $keys);
@@ -68,6 +68,11 @@ class Db
             $where = $where . $key.'=:'.$key;
         }
         return $where;
+    }
+
+    private function addImage($data){
+        $img = ImageManager::upload($_FILES);
+        return array_merge($data, $img);
     }
 
 }
