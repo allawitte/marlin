@@ -21,6 +21,7 @@ class Db
     }
 
     public function create($table, $data){
+        $img = ImageManager::upload($_FILES);
         $keys = array_keys($data);
         $fields = implode(' ,', $keys);
         $values = ':'.implode(', :', $keys);
