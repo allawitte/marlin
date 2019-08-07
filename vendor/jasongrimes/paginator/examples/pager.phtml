@@ -1,0 +1,21 @@
+<?php if ($paginator->getNumPages() > 1): ?>
+    <ul class="pagination">
+        <?php if ($paginator->getPrevUrl()): ?>
+            <li class="page-item"><a href="<?php echo $paginator->getPrevUrl(); ?>" class="page-link">&laquo; Previous</a></li>
+        <?php endif; ?>
+
+        <?php foreach ($paginator->getPages() as $page): ?>
+            <?php if ($page['url']): ?>
+                <li <?php echo $page['isCurrent'] ? 'class="active page-item"' : 'page-item'; ?>>
+                    <a href="<?php echo $page['url']; ?>" class="page-link"><?php echo $page['num']; ?></a>
+                </li>
+            <?php else: ?>
+                <li class="disabled page-item"><span><?php echo $page['num']; ?></span></li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <?php if ($paginator->getNextUrl()): ?>
+            <li class="page-item"><a href="<?php echo $paginator->getNextUrl(); ?>" class="page-link">Next &raquo;</a></li>
+        <?php endif; ?>
+    </ul>
+<?php endif; ?>
