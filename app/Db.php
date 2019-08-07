@@ -4,21 +4,15 @@ namespace app;
 
 use Aura\SqlQuery\QueryFactory;
 use PDO;
-use app\Config;
 
 class Db
 {
     private $pdo;
 
-    public function __construct()
+    public function __construct(PDO $pdo, QueryFactory $queryFactory)
     {
-        $config = Config::get()['database'];
-        $this->pdo = new PDO("{$config['connection']};dbname={$config['database']};charset={$config['charset']};", $config['username'], $config['password']);
-        $this->queryFactory = new QueryFactory('mysql');
-    }
-
-    public function getPdo(){
-        return $this->pdo;
+        $this->pdo = $pdo;
+        $this->queryFactory = $queryFactory;
     }
 
     public function getPostsTotal($table){
@@ -41,7 +35,7 @@ class Db
             '*'
         ])
             ->limit(10)
-            ->offset($_GET['page'] ?? 1)
+            ->page($_GET['page'] ?? 1)
             ->from($table);
         $sth = $this->pdo->prepare($select->getStatement());
         $sth->execute($select->getBindValues());
@@ -75,7 +69,7 @@ class Db
         $select->cols([
             '*'
         ])
-            ->where('id > :id')
+            ->where('id = :id')
             ->bindValue('id', $id)
             ->from($table);
         $sth = $this->pdo->prepare($select->getStatement());

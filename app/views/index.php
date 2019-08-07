@@ -1,14 +1,10 @@
 <?php
-use app\Db;
 use JasonGrimes\Paginator;
-
-$db = new Db();
 $this->layout('template', ['title' => 'Posts']);
-$totalItems = count($db->getPostsTotal('post'));
 $itemsPerPage = 10;
 $currentPage = $_GET['page'] ?? 1;
-$urlPattern = '?page=(:num)';
-$paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
+$urlPattern = '/?page=(:num)';
+$paginator = new Paginator($pages, $itemsPerPage, $currentPage, $urlPattern);
 
 ?>
 <div class="container">
@@ -27,7 +23,7 @@ $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern
         <?php foreach ($posts as $post): ?>
             <tr>
             <td><?= $post['id'] ?></td>
-            <td><?= $post['title'] ?></td>
+                <td><a href="post/<?= $post['id'] ?>"><?= $post['title'] ?></a></td>
             <td><?= $post['content'] ?></td>
             </tr>
         <? endforeach; ?>

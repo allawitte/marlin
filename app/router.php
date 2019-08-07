@@ -10,7 +10,9 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/logout', ['app\controllers\Home', 'logout']);
     $r->addRoute('GET', '/role', ['app\controllers\Home', 'assignRoleById']);
     // {id} must be a number (\d+)
-    $r->addRoute('GET', '/user/{id:\d+}', 'get_user_handler');
+    $r->addRoute('GET', '/post/{id:\d+}', ['app\controllers\Home', 'post']);
+    $r->addRoute('GET', '/edit/{id:\d+}', ['app\controllers\Home', 'edit']);
+    $r->addRoute('POST', '/edit/{id:\d+}', ['app\controllers\Home', 'edit']);
     // The /{title} suffix is optional
     $r->addRoute('GET', '/articles/{id:\d+}[/{title}]', 'get_article_handler');
 });
@@ -35,10 +37,6 @@ switch ($routeInfo[0]) {
         // ... 405 Method Not Allowed
         break;
     case FastRoute\Dispatcher::FOUND:
-//        $handler = $routeInfo[1];
-//        $vars = $routeInfo[2];
-//        $controller = new $handler[0];
-//        call_user_func([$controller, $handler[1]], $vars);
         $container->call($routeInfo[1], $routeInfo[2]);
         // ... call $handler with $vars
         break;

@@ -27,9 +27,22 @@ class Home
     public function index()
     {
         $posts = $this->db->getAll('post');
-        echo $this->templates->render('index', ['posts' => $posts]);
+        $pages = count($this->db->getPostsTotal('post'));
+        echo $this->templates->render('index', ['posts' => $posts, 'pages'=>$pages]);
+    }
+    public function post($id = 1){
+        $post = $this->db->getOne('post', $id);
+        echo $this->templates->render('post', ['post' => $post]);
     }
 
+    public function edit($id){
+        $post = $this->db->getOne('post', $id);
+        if(count($_POST)>0){
+            $this->db->update('post', $_POST, $id);
+            header('Location: /');
+        }
+        echo $this->templates->render('edit', ['post' => $post]);
+    }
     public function about($vars)
     {
         echo $this->templates->render('about', ['name' => 'Jonathan About']);
@@ -123,22 +136,9 @@ class Home
     public function logout()
     {
         $this->auth->logOut();
+        header('Location: /');
+        //$this->index();
 
-//// or
-//
-//        try {
-//            $this->auth->logOutEverywhereElse();
-//        } catch (\Delight\Auth\NotLoggedInException $e) {
-//            die('Not logged in');
-//        }
-//
-//// or
-//
-//        try {
-//            $this->auth->logOutEverywhere();
-//        } catch (\Delight\Auth\NotLoggedInException $e) {
-//            die('Not logged in');
-//        }
    }
 
    public function isLogged(){
